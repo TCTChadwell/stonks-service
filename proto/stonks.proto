@@ -1,0 +1,60 @@
+syntax = "proto3";
+package stonks;
+
+
+option go_package = "stonks-service/proto/stonks";
+
+service StonksService {
+    rpc GetFavorites(GetFavoritesRequest) returns (GetFavoritesResponse) {}
+    rpc CreateFavorite(CreateFavoritesRequest) returns (CreateFavoritesResponse) {}
+    rpc DeleteFavorite(DeleteFavoritesRequest) returns (DeleteFavoritesResponse) {}
+}
+
+
+message GetFavoritesRequest {
+    string user_id =1;
+}
+
+message GetFavoritesResponse {
+    repeated Stonk stonks =1;
+    string request_id =2;
+}
+
+message Stonk {
+    string symbol =1;
+
+    // in USD
+    double current_price =2;
+
+    string type =3;
+
+    double fifty_two_week_high = 4;
+    double fifty_two_week_low = 5;
+}
+
+message CreateFavoritesRequest {
+    string symbol =1;
+    string user_id =2;
+}
+
+message CreateFavoritesResponse{
+    Stonk stonk = 1;
+}
+
+message DeleteFavoritesRequest {
+    string symbol =1;
+    string user_id =2;
+}
+
+message DeleteFavoritesResponse{
+}
+
+
+
+
+
+
+
+
+
+
